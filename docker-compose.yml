@@ -1,8 +1,20 @@
-sinusbot:
-  image: sinusbot/docker
-  restart: always
-  ports:
-    - 8087:8087
-  volumes:
-    - ./scripts:/opt/sinusbot/scripts
-    - ./data:/opt/sinusbot/data
+version: "3"
+
+services:
+  sinusbot:
+    image: sinusbot/docker
+    restart: always
+    ports:
+      - 8087:8087
+#    networks:
+#      - proxy
+    volumes:
+      - ./scripts:/opt/sinusbot/scripts
+      - ./data:/opt/sinusbot/data
+    env_file: ./.env
+
+## If you use Nginx Proxy and you did defined it own network, uncomment the following and above lines
+#networks:
+#  proxy:
+#    external:
+#      name: http_proxy
